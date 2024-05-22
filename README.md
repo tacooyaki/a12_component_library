@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Running this React App for Docker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project includes a Create React App and Storybook for accessing and using components.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- Have Docker installed on your machine.
 
-### `npm start`
+## Dockerfile Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The Dockerfile does the following:
+1. Uses Node.js runtime.
+2. Sets directory to `/usr/src/app/mercredi_patrick_ui_garden`.
+3. Copies project files into the container.
+4. Installs project dependencies.
+5. Builds App for production.
+6. Builds Storybook web app.
+7. Installs `serve` and `http-server`.
+8. Exposes port 8083 for the Create React App and port 8084 for Storybook.
+9. Serves both Create React App and Storybook.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Building the Image
 
-### `npm test`
+To build, navigate to the project directory and run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+docker build -t mercredi_patrick_coding_assignment12 .
+```
 
-### `npm run build`
+## Running the Container
+After building the container, run the following command:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+docker run -d --name mercredi_patrick_coding_assignment12 -p 8083:8083 -p 8084:8084 mercredi_patrick_coding_assignment12
+```
+## Accessing the Applications
+Once the container is running, you can access the apps in your browser:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+React App: http://localhost:8083
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Storybook: http://localhost:8084
